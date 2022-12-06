@@ -1,0 +1,194 @@
+ <style>
+.alert{
+overflow-y:auto;
+ margin-bottom:-30px;
+}
+ .panel{
+height:200px;
+overflow-y:auto;
+ margin-bottom:-30px;
+}
+.example-modal .modal {
+      position: relative;
+    margin-top:-30px;
+    margin-bottom:-30px;
+    margin-right:-10px;
+    margin-left:-10px;
+      display: block;
+      z-index: 1;
+    }
+
+    .example-modal .modal {
+      background: transparent !important;
+    }
+</style> 
+<div class="row">
+	<div class=" col-xs-12 pull-right">
+<div id="msg_pop_error" ng-show="display.error "
+			class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-ban"></i>Error!
+			</h4>
+			{{display.error}}
+		</div>
+
+		<div id="msg_pop_success" ng-show="display.success "
+			class="alert alert-success alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-check"></i> Success!
+			</h4>
+			{{display.success}}
+
+		</div>
+		<div id="msg_pop_warning" ng-show="display.warning"
+			class="alert alert-warning alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-warning"></i> Warning!
+			</h4>
+			{{display.warning}}
+
+		</div>
+		<div id="msg_pop_info" ng-show="display.info" class="alert alert-info alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-info"></i> Info!
+			</h4>
+			{{display.info}}
+
+		</div>
+		
+		<div id="msg_pop_multi_success" ng-show="display.multiSuccess"
+			class="alert alert-success alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-ban"></i>Success!
+			</h4>
+			<ul>
+				<li ng-repeat="msg in display.multiSuccess"><span>{{
+						msg}}</span></li>
+			</ul>
+		</div>
+		<div id="msg_pop_multi_warning" ng-show="display.multiMessage"
+			class="alert alert-warning  alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<ul>
+				<li ng-repeat="msg in display.multiMessage"><span>{{
+						msg}}</span></li>
+			</ul>
+		</div>
+		<div id="msg_pop_error_data" ng-show="display.errorData"
+			class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-ban"></i>Error!
+			</h4>
+			<span>{{display.errorData}}</span>
+		</div>
+
+		<div id="msg_pop_multi_error" ng-show="display.multiError "
+			class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-ban"></i>Error!
+			</h4>
+			<ul>
+				<li ng-repeat="msg in display.multiError track by $index"><span>{{
+						msg}}</span></li>
+			</ul>
+		</div>
+		
+		<div id="msg_pop_multi_default" ng-show="display.multiDefault " style="padding-bottom:40px !important;"
+			class="alert alert-default alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-reply"></i>Result!
+			</h4>
+			<ul>
+			<li ng-repeat="msg in display.multiDefault track by $index" ng-if="msg.indexOf('Serial Number Generated')!=-1" style="color:green;font-size:16px"><span>{{
+						msg}}</span></li>
+				<li ng-repeat="msg in display.multiDefault track by $index" ng-if="msg.indexOf('Serial no')!=-1" style="color:blue;font-size:16px"><span>{{
+						msg}}</span></li>
+				<li  ng-repeat="msg in display.multiDefault track by $index" ng-if="msg.indexOf('There is no bill generated')!=-1" style="color:red;font-size:16px"><span>{{
+						msg}}</span></li>
+				
+						
+			</ul>
+		</div>
+		<div id="msg_pop_bill_gen_error" ng-show="display.billGenError "
+			class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-ban"></i>Error!
+			</h4>
+			<ul>
+				<li ng-repeat="msg in display.billGenError track by $index"><span>
+						{{globalCons['flat'][msg.id]}} &nbsp;&nbsp;:&nbsp;&nbsp; {{globalCons['errormsg'][msg.err]}}  <i ng-hide="msg.err.length==6">{{msg.err}}</i></span></li>
+			</ul>
+		</div>
+		
+		<div id="msg_pop_bill_prev_error" ng-show="display.billPrevError "
+			class="alert alert-danger alert-dismissable">
+			<button type="button" class="close" ng-click="ok()">
+				<i class="fa fa-times fa-lg" aria-hidden="true"></i>
+			</button>
+			<h4>
+				<i class="icon fa fa-ban"></i>Error!
+			</h4>
+			<h5>Can't Show Preview of Below Flat(s) Due to Respective Issues.</h5>
+			<ul>
+				<li ng-repeat="msg in display.billPrevError track by $index">
+						{{globalCons['flat'][msg.flat]}} &nbsp;&nbsp;:&nbsp;&nbsp;   {{msg.error}}</li>
+			</ul>
+		</div>
+		
+		
+		<div id="msg_pop_status" class="model" ng-show="display.status">
+			<div class="modal-header app-modal-radius">
+				<h4 class="modal-title app-modal-title">Status of sent
+					activation!</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered table-striped">
+				<tr>
+								<th>Flat No</th>
+								<th>Email</th>
+								<th>Phone</th>
+							</tr>
+					<tr ng-repeat="msg in display.status track by $index">
+						<td>{{msg.flat_no}}</td>
+						<td>{{msg.email | trueFalse}}</td>
+						<td>{{msg.phone |trueFalse}}</td>
+					</tr>
+				</table>
+
+			</div>
+
+			<div class="modal-footer app-modal-radius">
+				<button class="btn btn-primary app-btn-primary pull-left" ng-click="ok()">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

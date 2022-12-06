@@ -1,0 +1,189 @@
+<div class="row hidden-print">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href ng-click="changeMod('dashboard')"><span
+					class="glyphicon glyphicon-home"></span></a></li>
+			<li><a href>{{page.heading}}</a></li>
+		</ol>
+
+	</div>
+
+</div>
+<div ng-if="loading" class=" loader1"></div>
+<h2 ng-show="!manageStoreObj.obj" class="text-danger">{{msMessage}}</h2>
+
+<div ng-if="manageStoreObj.obj">
+<div class="row hidden-print" ng-if="page.view=='read'">
+	<div class="col-md-12 col-lg-12 col-sm-12">
+	<div class="box ">
+<div class="box-body ">
+		<form name="searchForm" class="form-horizontal">
+			<div class="form-group">
+			<div class="col-sm-12" >
+			<label>&nbsp;</label>
+					<u><a href style="font-size:20px;padding:10px;" ng-click="getListOrders();status1=false;status2=false;status3=false;changeHead('Last 48 hrs');">Recent Orders</a></u>
+					<!-- <u><a href style="font-size:20px;padding:20px;" ng-click="getListOrdersDelivered();changeHead('Previous Day');status1=false;status2=false;status3=false;">Previous Day's Delivered Orders</a></u> -->
+					
+					<label class="switch " style="margin-bottom:-10px !important;">
+						<input type="checkbox" ng-model="status1" ng-change="getOrdersByStatus('Shipped',status1);status2=false;status3=false;">
+						<span class="slider round " style="padding:10px;"></span>
+					</label>
+					<label style="font-size:20px;padding:10px;" class="text-muted">Shipped</label>
+					
+					<label class="switch " style="margin-bottom:-10px !important">
+						<input type="checkbox" ng-model="status2"  ng-change="getOrdersByStatus('Pending',status2);status1=false;status3=false;">
+						<span class="slider round "></span>
+					</label><label style="font-size:20px;padding:10px;" class="text-muted">Pending</label>
+					<label class="switch " style="margin-bottom:-10px !important">
+						<input type="checkbox" ng-model="status3"  ng-change="getOrdersByStatus('Canceled',status3);status2=false;status1=false;">
+						<span class="slider round "></span>
+					</label><label style="font-size:20px;padding:10px;" class="text-muted">Canceled</label>
+				</div>
+				<!-- <div class="col-sm-3 hidden-xs">
+					<button class=" btn btn-primary btn-sm" type="button" style='margin-top:24px;'
+						ng-click="showBillsReportByUnit(pageNo,billDetail);setPage(1)">
+						Search</button>
+				</div>
+				<div class="col-sm-12 visible-xs">
+					<button class=" btn btn-primary btn-block" type="button"
+						ng-click="showBillsReportByUnit(pageNo,billDetail);setPage(1)">
+						Search</button>
+				</div> -->
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+
+<div class="box box-info" ng-if="page.view=='read'">
+            <div class="box-header with-border">
+              <h3 class="box-title">Orders List</h3>
+              <div class="box-tools pull-right">
+                <a href ng-if="ordersList.ListOrdersResult.NextToken" style="font-size:20px;padding:10px;" ng-click="getListOrders(ordersList.ListOrdersResult.NextToken)">Next <i class="fa fa-arrow-right "></i></a>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive">
+                <table class="table no-margin table-bordered">
+                  <thead>
+                  <tr>
+                    <th>Amazon Order ID #</th>
+                    <th>Purchase Date</th>
+                    <th>Order Type</th>
+                    <th>Status</th>
+                    <!-- <th>Shipped/Unshipped Items</th> -->
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr ng-repeat="order in ordersList.ListOrdersResult.Orders">
+                    <td><a href ng-click="getOrderDetails();changeView('detail')">{{order.AmazonOrderId}}</a></td>
+                    <td>{{filters(order.PurchaseDate)|date:'dd-MMM-yyyy hh:mm a'}}</td>
+                     <td>{{order.OrderType}}</td>
+                    <td><span ng-if="order.OrderStatus=='Shipped'" class="label label-success">{{order.OrderStatus}}</span>
+                    <span ng-if="order.OrderStatus=='Pending'" class="label label-warning">{{order.OrderStatus}}</span>
+                    <span ng-if="order.OrderStatus=='Canceled'" class="label label-danger">{{order.OrderStatus}}</span></td>
+                     <!--  <td>{{order.NumberOfItemsShipped}} / {{order.NumberOfItemsUnshipped}}</td> -->
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.table-responsive -->
+            </div>
+          </div>
+
+
+    <!-- Main content -->
+    <div class="row">
+    <div class=" invoice" ng-if="page.view=='detail'">
+      <!-- title row -->
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-globe"></i> {{orderDetails.GetOrderResult.Orders[0].SalesChannel}}
+            
+            <a href class="pull-right hidden-print" style="color:lightgray !important" ng-click="changeView('read')"><i class="fa fa-remove fa-lg"></i></a>
+          </h2>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- info row -->
+      <div ng-repeat="order in orderDetails.GetOrderResult.Orders track by $index">
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          To
+          <address>
+            <strong>{{order.ShippingAddress.Name}}</strong><br>
+           {{order.ShippingAddress.AddressLine1}}<br>
+            {{order.ShippingAddress.City}}, {{order.ShippingAddress.CountryCode}}<br>
+            {{order.ShippingAddress.StateOrRegion}}  {{order.ShippingAddress.PostalCode}}<br>
+            Email: {{order.BuyerEmail}}
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+         <!--  To
+          <address>
+            <strong>John Doe</strong><br>
+            795 Folsom Ave, Suite 600<br>
+            San Francisco, CA 94107<br>
+            Phone: (555) 539-1037<br>
+            Email: john.doe@example.com
+          </address> -->
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <b>Order ID: #{{order.AmazonOrderId}}</b><br>
+          <b>Purchase Date:</b> {{filters(order.PurchaseDate)|date:'dd-MMM-yyyy hh:mm a'}}<br>
+          <b>Shipped Items:</b> {{order.NumberOfItemsShipped}}<br>
+          <b>Unshipped Items:</b> {{order.NumberOfItemsUnshipped}}<br>
+          <b>Last Updated Date:</b> {{filters(order.LastUpdateDate)|date:'dd-MMM-yyyy hh:mm a'}}<br>
+          <b>Latest Shipped Date:</b> {{filters(order.LatestShipDate)|date:'dd-MMM-yyyy hh:mm a'}}
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-xs-12 table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Qty</th>
+              <th>Seller Order Id #</th>
+               <th>Order Type</th>
+              <th>Status</th>
+               <th>Payment Method</th>
+              <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{$index+1}}</td>
+              <td>{{order.SellerOrderId}}</td>
+               <td>{{order.OrderType}}</td>
+              <td>{{order.OrderStatus}}</td>
+              <td>{{order.PaymentMethod}}</td>
+              <td>{{order.OrderTotal.Amount}} {{order.OrderTotal.CurrencyCode}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+</div>
+
+      <!-- <div class="row no-print">
+        <div class="col-xs-12">
+          <button type="button" ng-click="print()" class="btn btn-primary pull-right" style="margin-right: 5px;">
+            <i class="fa fa-print"></i> Print
+          </button>
+        </div>
+      </div> -->
+    </div>
+    </div>
+    <!-- /.content -->
+</div>

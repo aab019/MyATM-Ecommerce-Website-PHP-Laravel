@@ -1,0 +1,21 @@
+<div class="modal-body">
+<div class="row text-center">
+	<div ng-if="item.icon"><img src="static/img/spinner.gif" alt="logo"> </div>	
+</div>
+		<table class="table table-striped table-bordered">
+		<tbody>
+			<tr>
+				<th colspan=3>{{item.heading}}&nbsp&nbsp&nbsp{{item.succCount}}/{{item.totalCount}}</th>			
+			</tr>			
+			<tr ng-repeat="itm in item.data">				
+				<td>{{ itm[0]}}</td>
+				<td ng-if="itm[1] && itm[1]==true"><i class="glyphicon glyphicon-ok txt-green"></i></td>
+				<td ng-if="itm[1]==false"><i class="glyphicon glyphicon-remove txt-red"></i></td>
+				<td ng-if="itm[1]==false" class="error">{{itm[2]}}</td>
+			</tr>
+	</table>	 
+	</div> 
+<div class="modal-footer app-modal-radius">
+	<button class="btn btn-primary app-btn-primary " ng-click="ok()">{{item.action}}</button>	
+</div>
+ 

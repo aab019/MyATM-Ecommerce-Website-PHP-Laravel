@@ -1,0 +1,144 @@
+<div class="row hidden-print">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href ng-click="changeMod('dashboard')"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li ><a href >Dashboard</a></li>
+		</ol>
+
+	</div>
+
+</div>
+<div ng-if="loading" class=" loader1"></div>
+			<h2 ng-show="!manageStoreObj.obj" class="text-danger">{{msMessage}}</h2>
+<div ng-if="manageStoreObj.obj">
+<div class="row">
+<div class="col-md-6">
+<div class="box box-danger">
+            <div class="box-header with-border">
+              <h3 class="box-title">Sent Email Bar Chart</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body chart-responsive">
+              <div class="chart" id="email-chart" style="height: 200px; position: relative;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+</div>
+ <div class="col-md-6">
+<div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Sent Email Pie Chart</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <div class="box-body chart-responsive">
+              <div class="chart" id="pie-chart" style="height: 200px; position: relative;"></div>
+            </div>
+          </div>
+</div> 
+
+<!-- <div class="col-md-12">
+	<div class="box box-danger">
+			<div class="box-header with-border">
+				<h3 class="box-title">User Details Summary</h3>
+
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool"
+						data-widget="collapse">
+						<i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove">
+						<i class="fa fa-times"></i>
+					</button>
+				</div>
+			</div>
+			<div class="box-body chart-responsive">
+				<div class="chart" id="chart_div"
+					style="height: 200px; position: relative;"></div>
+			</div>
+			/.box-body
+		</div>
+	</div> -->
+
+
+</div>
+<div class="row">
+<div class="col-md-12">
+		<div class="box box-success">
+			<div class="box-header with-border">
+				<h3 class="box-title" style="margin-right:30px;">Comparison Chart</h3>
+				
+				<div class="btn-group ">
+				 <u><a href ng-click="getEmailCountsWithParams('daily')" style="padding-right:25px;padding-left:25px;font-size:18px">Daily</a></u>
+				 <u> <a href ng-click="getEmailCountsWithParams('week')" style="padding-right:25px;padding-left:25px;font-size:18px">Weekly</a></u>
+				 <u> <a href ng-click="getEmailCountsWithParams('month')" style="padding-right:25px;padding-left:25px;font-size:18px">Monthly</a></u>
+				  <!-- <button type="button" class="btn btn-primary" ng-click="getEmailCountsWithParams('quarter')" style="padding-right:25px;padding-left:25px;">90 Days</button> -->
+				</div>
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool"
+						data-widget="collapse">
+						<i class="fa fa-minus"></i>
+					</button>
+					<button type="button" class="btn btn-box-tool" data-widget="remove">
+						<i class="fa fa-times"></i>
+					</button>
+				</div>
+			</div>
+			<div class="box-body chart-responsive">
+			<div class="alert alert-info alert-dismissable" ng-show="messageObj.msg">
+			{{messageObj.msg}}</div>
+			 <div class="chart" id="columnchart_values" style="height: 200px; position: relative;"></div>
+			</div>
+			
+			<!-- /.box-body -->
+		</div>
+	</div>
+	<div class="col-md-12">
+<div class="box  box-primary">
+	<div class="box-header with-border">
+		<h3 class="box-title">Sent Email Table View</h3>
+		<button class="btn btn-box-tool pull-right" data-widget="collapse">
+			<i class="fa fa-minus"></i>
+		</button>
+	</div>
+	<div class="box-body">
+	<div class="table-responsive">
+		<table style="border: 3px solid #d3dcdc;" class="table table-bordered table-striped table-condensed">
+			<thead >
+				<tr>
+					<th >&nbsp;</th>
+					<th style="text-align:center !important">7 Days</th>
+					<th style="text-align:center !important">30 Days</th>
+					<th style="text-align:center !important">90 Days</th>
+					<th style="text-align:center !important">1 Year</th>
+					<th style="text-align:center !important">Lifetime</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><b>Email Sent</b></td>
+					<td style="text-align:center !important">{{emailCounts[0].count}}</td>
+					<td style="text-align:center !important">{{emailCounts[1].count}}</td>
+					<td style="text-align:center !important">{{emailCounts[2].count}}</td>
+					<td style="text-align:center !important">{{emailCounts[3].count}}</td>
+					<td style="text-align:center !important">{{emailCounts[4].count}}</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+</div>
+</div>
+	
+</div>
+
+</div>

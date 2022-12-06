@@ -1,0 +1,27 @@
+
+<div class="modal-header" style="background-color:#f39c12;color:white;">
+	<h3 class="modal-title">{{item.heading}}</h3>
+</div>
+<div class="modal-body">
+	<span ng-repeat="itm in item.data" >
+             <p style="margin-bottom:10px;">{{ itm }}</p>
+         </span>
+     <div style="margin-bottom:10px;" id="sus_user_id" custom-select="u.flat_no as (u.name+'  -'+u.display_unit_no) for u in globalCons.users | filter: $searchTerm"
+									ng-model="item.flat_no" autofocus></div>
+     <p class="input-group ">
+					<input id="sus_start_date" type="text" class="form-control " datepicker-popup="dd-MMM-yyyy" show-button-bar="false" 
+						show-weeks="false" ng-model="item.transfer_date" is-open="opened[0]" ng-click="open($event,0)" readonly placeholder=" Enter Date" ng-click="open($event,3)" /> <span
+						class="input-group-btn  ">
+						<button type="button" class="btn btn-default " ng-click="open($event,0)">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+				</p>
+	<textarea class="form-control" rows="3" id="suspend_remarks" placeholder="Enter Remarks" ng-model="item.remarks"></textarea>
+</div>
+<div class="modal-footer">
+
+	<button class="btn btn-primary " ng-click="ok()">Confirm</button>
+	<button class="btn btn-danger " ng-click="cancel()">Cancel</button>
+	 
+</div>

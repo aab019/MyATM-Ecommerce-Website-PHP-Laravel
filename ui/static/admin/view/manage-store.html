@@ -1,0 +1,69 @@
+<div class="row hidden-print">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href ng-click="changeMod('dashboard')"><span
+					class="glyphicon glyphicon-home"></span></a></li>
+			<li><a href>Store Setting</a></li>
+		</ol>
+
+	</div>
+
+</div>
+<div ng-if="loading" class=" loader1"></div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="box box-solid box-primary ">
+			<div class="box-header with-border">
+				<h3 class="box-title">Store Setting</h3>
+			</div>
+			<div class="box-body">
+				<form name="form" ng-submit="saveStoreSetting(form.$dirty)">
+
+					<div class="form-group">
+						<div class="col-sm-6 margin-bottom-20">
+							<label>Marketplace ID</label>
+							<div custom-select="m.place_id as m.place for m in marketPlaces | filter: $searchTerm"
+										ng-model="profile.marketplace_id" autofocus></div>
+						</div>
+						<div class="col-sm-6 margin-bottom-20">
+							<label>Seller ID</label> <input type="text" name="seller_id" required
+								class="form-control " placeholder="Enter Seller ID"
+								ng-model="profile.seller_id" ng-trim="true" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-6 margin-bottom-20">
+							<label>AWS Access Key ID</label> <input type="text" required
+								name="aws_access_key_id" class="form-control app-input"
+								placeholder="Enter AWS Access Key ID"
+								ng-model="profile.aws_access_key_id" />
+						</div>
+						<div class="col-sm-6 margin-bottom-20">
+							<label>Secret Key</label> <input type="text" name="secret_key" required
+								class="form-control app-input" placeholder="Enter Secret Key"
+								ng-model="profile.secret_key" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-6 margin-bottom-20">
+							<label>Email Address</label> <input type="email" name="email" required
+								class="form-control " placeholder="Enter Email Address"
+								ng-model="profile.email" ng-disabled="page.view=='update'"
+								ng-pattern="/^[A-z0-9_.\-]+[@][A-z0-9_\-]+([.][A-z0-9_\-]+)+[A-z.]{1,4}$/" />
+							<span style="color: red;" ng-show="form.email.$error.pattern">Enter
+								valid email id!</span>
+						</div>
+						<div class="col-sm-6 margin-bottom-20"><br>
+							<input type="submit" name="submit" value="Submit"
+								class="btn btn-success app-btn-success " /> <!-- <input
+								type="button" value="Cancel"
+								class="btn btn-danger app-btn-danger "
+								ng-click="dataLoad('userDetail');changeView('read')" /> -->
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

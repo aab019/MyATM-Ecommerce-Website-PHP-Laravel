@@ -1,0 +1,42 @@
+ 
+ <div ng-controller="ImageUploadController">
+ <div id="user_edit_modal_head" class="modal-header " style="background-color:#3c8dbc;color:white">
+            <h3 class="modal-title text-center">Select Profile Photo </h3>
+        </div>
+        <div id="user_edit_modal_body" class="modal-body">
+       <div ng-if="loading" class=" loader1"></div>
+				<div>
+							 <p style="text-align:center;">
+							 <span ng-show="loading" class="text-bold text-success text-lg">Image uploading in progress...<br></span> 
+    							<!-- <img-crop image="myImage" area-type="rectangle" result-image="myCroppedImage" result-image-size="100"></img-crop> -->
+							  <img 
+								width="120px" height="100px" class="imagesmall"
+								ng-show="image.compressed.dataURL"
+								ng-src="{{image.compressed.dataURL}}" id="image-src" />  </p> 
+								<div class="upload2">
+								<input id="complaintImage" type="file" accept="image/*" image="image" class="btn btn-primary btn-sm btn-file"
+										ng-model="image" resize-max-height="1000"
+										resize-max-width="1000" resize-quality="0.7"
+										resize-type="image/jpeg"
+										onchange="angular.element(this).scope().setFile(this)" />
+								</div>
+								
+							<!-- <span ng-show="loading" class="text-center"><i style="font-size:40px;color:green;" class="fa fa-spinner fa-spin"></i></span> -->
+								<p style="text-align:center;"><span ng-show="image"> <i>{{file.name}}</i> (<span
+									ng-switch="file.size > 1024*1024"> <span
+										ng-switch-when="true">{{file.size / 1024 / 1024 |
+											number:2}} MB</span> <span ng-switch-default>{{file.size /
+											1024 | number:2}} kB</span>
+								</span>)
+								</span><i ng-hide="image || profile.image_src">Choose photo.... (max size 4MB)</i></p> 
+								
+				</div>				
+				
+       
+          
+		<div id="user_edit_modal_footer" class="modal-footer">
+            <button type="submit" id="user_edit_btn_ok" class="btn btn-primary" ng-click="saveImage()" >Submit</button>
+            <button type="button" id="user_edit_btn_cancel" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+        </div>
+       </div>

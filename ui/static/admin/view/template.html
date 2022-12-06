@@ -1,0 +1,106 @@
+
+<div class="row hidden-print">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href ng-click="changeMod('dashboard')"><span
+					class="glyphicon glyphicon-home"></span></a></li>
+			<li><a href>Template</a></li>
+			<li>{{page.heading}}</li>
+			<!-- <div class="pull-right">
+				<a href ng-click="changeView('read')"  class="btn btn-xs btn-social btn-linkedin" >
+						 <i class="fa fa-eye"></i> Templates </a>
+						<a href ng-click="changeView('create')"  class="btn btn-xs btn-social btn-linkedin" >
+						 <i class="fa fa-file-text"></i> Create Templates  </a>
+					</div> -->
+		</ol>
+
+	</div>
+
+</div>
+<div ng-if="loading" class=" loader1"></div>
+		<div ng-show="page.view=='create' || page.view=='update'" class="box  box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">{{page.heading}}</h3>
+				  <a href class="pull-right" style="color:lightgray !important" ng-click="changeView('read')"><i class="fa fa-remove fa-2x"></i></a>
+							
+			</div>
+			<div class="box-body">
+				<form>
+					<div class="form-group">
+						<div id='toolbar'>
+       <div class="btn-group">
+        <a data-wysihtml5-command="bold" title="CTRL+B" class='btn btn-default'><b>B</b></a> 
+    <a data-wysihtml5-command="italic" title="CTRL+I" class='btn btn-default'><i>I</i></a> 
+    <a data-wysihtml5-command="underline" title="CTRL+U" class='btn btn-default'><u>U</u></a> 
+    </div>
+   <div class="btn-group">
+    <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" class='btn btn-default'>H1</a> 
+    <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" class='btn btn-default'>H2</a> 
+     <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" class='btn btn-default'>H3</a> 
+      <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h4" class='btn btn-default'>H4</a> 
+       <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h5" class='btn btn-default'>H5</a> 
+        <a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h6" class='btn btn-default'>H6</a> 
+        </div>
+        <div class="btn-group">
+    <a data-wysihtml5-command="insertUnorderedList" class='btn btn-default'><i class="fa fa-list-ul fa-lg"></i></a> 
+    <a data-wysihtml5-command="insertOrderedList" class='btn btn-default'><i class="fa fa-list-ol fa-lg"></i></a> 
+    </div>
+    <div class="btn-group">
+    <a data-wysihtml5-command="undo" class='btn btn-default'><i class="fa fa-undo fa-lg"></i></a> 
+    <a data-wysihtml5-command="redo" class='btn btn-default'><i class="fa fa-repeat fa-lg"></i></a> 
+    </div>
+     <!-- <div class="btn-group">
+       <a data-wysihtml5-command="createLink" class='btn btn-default'><i class="fa fa-link fa-lg"></i></a> 
+    <a data-wysihtml5-command="insertImage" class='btn btn-default'><i class="fa fa-image fa-lg"></i></a>  
+      </div>  -->
+      </div>
+      
+      <!--  <div data-wysihtml5-dialog="createLink" style="display:none">
+      <label>
+        Link:
+        <input data-wysihtml5-dialog-field="href" value="http://">
+      </label>
+      <a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+    </div>
+     -->
+    <br>
+        <textarea rows="40" class="form-control" wysiwyg='templateObj.template' wysiwyg-toolbar='toolbar' ng-model="templateObj.template"></textarea>
+      </div>
+					<div class="form-group">
+						<!-- <label><input type="checkbox"
+							ng-model="templateObj.is_active" >&nbsp;&nbsp; Active</label> -->
+							
+						<button type="submit" ng-click="saveTemplate(templateObj)"
+							class="btn btn-primary ">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div ng-if="page.view=='read'" class="box  box-primary">
+		<div class="box-header with-border">
+				<h3 class="box-title">Template List</h3>
+				<button class="btn btn-box-tool pull-right" data-widget="collapse">
+					<i class="fa fa-minus"></i>
+				</button>
+			</div>
+			<div class="box-body">
+			<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead >
+				<tr>
+					<th>Template</th>
+					<!-- <th>Active</th> -->
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="temp in templates track by $index">
+					<td ><span ng-bind-html="temp.template"></span></td>
+					<!-- <td>{{temp.is_active?'Yes' : 'No'}}</td> -->
+					<td><a class="btn btn-primary btn-sm" ng-click="edit(temp);changeView('update');"> Edit </a></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+			</div>
+		</div>
